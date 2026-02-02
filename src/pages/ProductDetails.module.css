@@ -174,3 +174,100 @@
 .buyBtn {
     flex: 1;
 }
+
+/* --- Fit Confidence --- */
+.confidenceCard {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.confidenceRow {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 8px 0;
+}
+
+.metricGroup {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+}
+
+.metricLabel {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metricValue {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.metricText {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.confidenceSeparator {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 16px 0;
+}
+
+.confidenceTotal {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.totalLabel {
+    font-size: 12px;
+    color: var(--color-accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.totalText {
+    font-size: 16px;
+    color: white;
+    font-style: italic;
+}
+
+/* --- Benefits --- */
+.benefitSection {
+    margin-top: 32px;
+    margin-bottom: 24px;
+}
+
+.benefitList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.benefitItem {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+/* --- Exclusive Context --- */
+.exclusiveText {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #10B981;
+    /* Success/Safe green */
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}

@@ -4,7 +4,7 @@ export const products = [
         name: "Classic Oxford Shirt",
         price: 59.90,
         fitScore: 98,
-        image: "https://images.unsplash.com/photo-1598033129183-c4f50c769f74?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=800&q=80",
         description: "A timeless classic for any wardrobe. Made from 100% organic cotton for breathable comfort.",
         material: "100% Organic Cotton",
         fit: "Slim Fit",
@@ -68,6 +68,30 @@ export const products = [
         description: "Modern athletic wear for the streets. Feature zipped pockets and cuffed ankles.",
         material: "66% Cotton, 34% Polyester",
         fit: "Athletic",
+        care: "Machine wash cold",
+        sizes: ["S", "M", "L", "XL"]
+    },
+    {
+        id: 7,
+        name: "Essential Crew Tee",
+        price: 24.00,
+        fitScore: 96,
+        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
+        description: "The perfect everyday t-shirt. Heavyweight cotton that holds its shape.",
+        material: "100% Cotton",
+        fit: "Regular",
+        care: "Machine wash warm",
+        sizes: ["S", "M", "L", "XL"]
+    },
+    {
+        id: 8,
+        name: "Signature Polo Shirt",
+        price: 52.00,
+        fitScore: 89,
+        image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?auto=format&fit=crop&w=800&q=80",
+        description: "Breathable pique fabric with a structured collar. Smart casual essential.",
+        material: "100% Cotton Pique",
+        fit: "Slim",
         care: "Machine wash cold",
         sizes: ["S", "M", "L", "XL"]
     }

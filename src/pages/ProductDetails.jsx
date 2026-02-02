@@ -91,6 +91,49 @@ const ProductDetails = () => {
                             </p>
                         </div>
 
+                        {/* --- NEW: Fit Confidence --- */}
+                        <div className={styles.section}>
+                            <h3>Fit Confidence</h3>
+                            <div className={styles.confidenceCard}>
+                                <div className={styles.confidenceRow}>
+                                    <div className={styles.metricGroup}>
+                                        <span className={styles.metricLabel}>Height</span>
+                                        <span className={styles.metricValue}>98%</span>
+                                    </div>
+                                    <p className={styles.metricText}>Length complements your height perfectly.</p>
+                                </div>
+                                <div className={styles.confidenceSeparator} />
+                                <div className={styles.confidenceRow}>
+                                    <div className={styles.metricGroup}>
+                                        <span className={styles.metricLabel}>Shoulders</span>
+                                        <span className={styles.metricValue}>96%</span>
+                                    </div>
+                                    <p className={styles.metricText}>Designed to sit comfortably at your shoulder line.</p>
+                                </div>
+                                <div className={styles.confidenceSeparator} />
+                                <div className={styles.confidenceTotal}>
+                                    <span className={styles.totalLabel}>Overall Confidence</span>
+                                    <p className={styles.totalText}>
+                                        Excellent match. accurate to your fit profile.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* --- NEW: In-store Benefits --- */}
+                        <div className={styles.benefitSection}>
+                            <h3>In-store Benefits</h3>
+                            <div className={styles.benefitList}>
+                                <div className={styles.benefitItem}>• First purchase discount applied</div>
+                                <div className={styles.benefitItem}>• Free tailoring consultation available</div>
+                            </div>
+                        </div>
+
+                        {/* --- NEW: Store Context --- */}
+                        <p className={styles.exclusiveText}>
+                            Available for immediate in-store pickup.
+                        </p>
+
                         {/* Spacer for sticky actions */}
                         <div style={{ height: 120 }}></div>
                     </div>

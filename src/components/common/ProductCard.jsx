@@ -6,7 +6,7 @@ const ProductCard = ({ product, onClick }) => {
         <div className={styles.card} onClick={() => onClick(product)} role="button" tabIndex={0}>
             <div className={styles.imageWrapper}>
                 <img src={product.image} alt={product.name} className={styles.image} loading="lazy" />
-                <div className={styles.fitBadge}>
+                <div className={`${styles.fitBadge} ${product.fitScore >= 95 ? styles.highMatch : ''}`}>
                     <span className={styles.matchText}>{product.fitScore}% Match</span>
                 </div>
             </div>
