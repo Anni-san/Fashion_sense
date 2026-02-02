@@ -5,9 +5,14 @@
     margin: 0;
     padding: 0;
     -webkit-tap-highlight-color: transparent;
-    /* Remove tap highlight on touch */
     user-select: none;
-    /* Prevent text selection generally */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+html {
+    /* Ensure height is correct for flex containers */
+    height: 100%;
 }
 
 body {
@@ -16,12 +21,15 @@ body {
     font-family: var(--font-family);
     font-size: var(--text-body);
     line-height: 1.4;
+    /* Allow scroll if needed, but PageWrapper handles main scroll */
     overflow: hidden;
-    /* Prevent body scroll, handle internally */
-    /* Hide cursor if desired for pure touch, but usually keeping it for dev is fine. 
-     For production kiosk, often cursor: none is added via CSS or OS. 
-     We'll leave it visible for now or set to none if requested. 
-     Prompt says "No browser UI visible", implies full screen. */
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -55,9 +63,10 @@ input {
     font-family: var(--font-family);
 }
 
-/* Scrollbar styling for internal scroll containers */
+/* Scrollbar styling */
 ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -69,24 +78,74 @@ input {
     border-radius: 3px;
 }
 
-/* Animations */
-.fade-enter {
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Tactile & Animation Utilities */
+.tactile-active:active {
+    transform: scale(0.97);
+}
+
+.glow-on-hover:hover {
+    box-shadow: 0 0 15px rgba(79, 140, 255, 0.3);
+}
+
+/* Page Transitions */
+.page-enter {
+    animation: pageEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered Children Utility */
+.stagger-enter>* {
     opacity: 0;
-    transform: scale(0.98);
+    animation: slideUpFade 0.5s ease-out forwards;
 }
 
-.fade-enter-active {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity var(--transition-speed) var(--transition-ease),
-        transform var(--transition-speed) var(--transition-ease);
+.stagger-enter>*:nth-child(1) {
+    animation-delay: 0.1s;
 }
 
-.fade-exit {
-    opacity: 1;
+.stagger-enter>*:nth-child(2) {
+    animation-delay: 0.15s;
 }
 
-.fade-exit-active {
-    opacity: 0;
-    transition: opacity var(--transition-speed) var(--transition-ease);
+.stagger-enter>*:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.stagger-enter>*:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.stagger-enter>*:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+.stagger-enter>*:nth-child(6) {
+    animation-delay: 0.35s;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

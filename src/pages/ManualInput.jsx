@@ -16,6 +16,8 @@ const ManualInput = () => {
         hips: ''
     });
 
+    const [touched, setTouched] = useState({});
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         // Allow only numbers
@@ -24,84 +26,59 @@ const ManualInput = () => {
         }
     };
 
+    const handleBlur = (e) => {
+        setTouched(prev => ({ ...prev, [e.target.name]: true }));
+    };
+
     const isFormValid = Object.values(formData).every(val => val.length > 0);
 
     const handleSubmit = () => {
         if (isFormValid) {
             saveMeasurements(formData);
             navigate('/processing');
+        } else {
+            // Mark all as touched to show errors
+            const allTouched = Object.keys(formData).reduce((acc, key) => ({ ...acc, [key]: true }), {});
+            setTouched(allTouched);
         }
     };
 
     return (
         <PageWrapper showHeader={true} showFooter={false}>
             <div className={styles.container}>
-                <h2 className={styles.heading}>Enter your measurements</h2>
+                <div className={styles.stepIndicator}>Step 1 of 3</div>
+                <h2 className={styles.heading}>Enter measurements</h2>
 
                 <div className={styles.formGrid}>
-                    <div className={styles.inputGroup}>
-                        <label>Height (cm)</label>
-                        <input
-                            type="text"
-                            inputMode="numeric"
-                            name="height"
-                            value={formData.height}
-                            onChange={handleChange}
-                            placeholder="175"
-                        />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label>Weight (kg)</label>
-                        <input
-                            type="text"
-                            inputMode="numeric"
-                            name="weight"
-                            value={formData.weight}
-                            onChange={handleChange}
-                            placeholder="70"
-                        />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label>Chest (cm)</label>
-                        <input
-                            type="text"
-                            inputMode="numeric"
-                            name="chest"
-                            value={formData.chest}
-                            onChange={handleChange}
-                            placeholder="96"
-                        />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label>Waist (cm)</label>
-                        <input
-                            type="text"
-                            inputMode="numeric"
-                            name="waist"
-                            value={formData.waist}
-                            onChange={handleChange}
-                            placeholder="80"
-                        />
-                    </div>
-
-                    <div className={styles.inputGroup}>
-                        <label>Hips (cm)</label>
-                        <input
-                            type="text"
-                            inputMode="numeric"
-                            name="hips"
-                            value={formData.hips}
-                            onChange={handleChange}
-                            placeholder="95"
-                        />
-                    </div>
+                    <InputGroup
+                        label="Height" unit="cm" name="height"
+                        value={formData.height} onChange={handleChange} onBlur={handleBlur}
+                        error={touched.height && !formData.height}
+                    />
+                    <InputGroup
+                        label="Weight" unit="kg" name="weight"
+                        value={formData.weight} onChange={handleChange} onBlur={handleBlur}
+                        error={touched.weight && !formData.weight}
+                    />
+                    <InputGroup
+                        label="Chest" unit="cm" name="chest"
+                        value={formData.chest} onChange={handleChange} onBlur={handleBlur}
+                        error={touched.chest && !formData.chest}
+                    />
+                    <InputGroup
+                        label="Waist" unit="cm" name="waist"
+                        value={formData.waist} onChange={handleChange} onBlur={handleBlur}
+                        error={touched.waist && !formData.waist}
+                    />
+                    <InputGroup
+                        label="Hips" unit="cm" name="hips"
+                        value={formData.hips} onChange={handleChange} onBlur={handleBlur}
+                        error={touched.hips && !formData.hips}
+                    />
                 </div>
 
                 <div className={styles.actionArea}>
-                    <PrimaryButton onClick={handleSubmit} disabled={!isFormValid} style={{ maxWidth: '300px' }}>
+                    <PrimaryButton onClick={handleSubmit} disabled={!isFormValid} style={{ maxWidth: '400px' }}>
                         Continue
                     </PrimaryButton>
                 </div>
@@ -109,5 +86,23 @@ const ManualInput = () => {
         </PageWrapper>
     );
 };
+
+const InputGroup = ({ label, unit, name, value, onChange, onBlur, error }) => (
+    <div className={`${styles.inputGroup} ${error ? styles.error : ''}`}>
+        <label>{label}</label>
+        <div className={styles.inputWrapper}>
+            <input
+                type="text"
+                inputMode="numeric"
+                name={name}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                autoComplete="off"
+            />
+            <span className={styles.unit}>{unit}</span>
+        </div>
+    </div>
+);
 
 export default ManualInput;

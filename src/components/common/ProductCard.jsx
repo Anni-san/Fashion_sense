@@ -3,11 +3,11 @@ import styles from './ProductCard.module.css';
 
 const ProductCard = ({ product, onClick }) => {
     return (
-        <div className={styles.card} onClick={() => onClick(product)}>
+        <div className={styles.card} onClick={() => onClick(product)} role="button" tabIndex={0}>
             <div className={styles.imageWrapper}>
-                <img src={product.image} alt={product.name} className={styles.image} />
+                <img src={product.image} alt={product.name} className={styles.image} loading="lazy" />
                 <div className={styles.fitBadge}>
-                    <span className={styles.star}>⭐</span> {product.fitScore}% Match
+                    <span className={styles.matchText}>{product.fitScore}% Match</span>
                 </div>
             </div>
             <div className={styles.details}>

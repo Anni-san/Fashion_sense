@@ -1,4 +1,5 @@
 .container {
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--color-bg-primary);
@@ -10,30 +11,71 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
+}
+
+.logoWrapper {
+    animation: logoFadeIn 1s cubic-bezier(0.22, 1, 0.36, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+@keyframes logoFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .logo {
-    font-size: 64px;
+    font-size: 72px;
     font-weight: 800;
     letter-spacing: -2px;
     background: linear-gradient(90deg, #fff, #a5b4fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.contextLine {
+    font-size: 20px;
+    color: var(--color-accent-primary);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.9;
 }
 
 .tagline {
-    font-size: 24px;
-    color: var(--color-text-secondary);
+    font-size: 32px;
+    color: white;
     font-weight: 400;
-    margin-bottom: 48px;
+    margin-bottom: 64px;
+    opacity: 0.9;
+    animation: fadeIn 1.2s ease-out;
+}
+
+.loaderWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    animation: fadeIn 1.5s ease-out;
 }
 
 .progressContainer {
-    width: 300px;
-    height: 4px;
+    width: 360px;
+    height: 6px;
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -41,4 +83,27 @@
     height: 100%;
     background-color: var(--color-accent-primary);
     transition: width 0.05s linear;
+}
+
+.loadingText {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    font-feature-settings: "tnum";
+    min-width: 200px;
+}
+
+.percentage {
+    color: white;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

@@ -4,20 +4,33 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    padding-bottom: 80px;
+    /* Space for sticky button visual balance */
+}
+
+.stepIndicator {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    font-weight: 600;
 }
 
 .heading {
-    margin-bottom: 40px;
+    margin-bottom: 48px;
     text-align: center;
 }
 
 .formGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px 48px;
+    gap: 40px 64px;
+    /* Wider gap */
     width: 100%;
-    max-width: 600px;
-    margin-bottom: 48px;
+    max-width: 800px;
+    /* Wider container */
+    margin-bottom: 64px;
 }
 
 .inputGroup {
@@ -27,33 +40,66 @@
 }
 
 .inputGroup label {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--color-text-secondary);
     font-weight: 500;
 }
 
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
 .inputGroup input {
     background-color: var(--color-bg-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-sm);
+    border: 2px solid var(--color-border);
+    /* Thicker border */
+    border-radius: var(--border-radius-md);
     color: white;
-    font-size: 28px;
-    padding: 16px;
+    font-size: 32px;
+    /* Large text */
+    padding: 20px 24px;
+    width: 100%;
     outline: none;
-    transition: border-color 0.2s;
-    text-align: center;
+    transition: all 0.2s;
+    text-align: left;
 }
 
 .inputGroup input:focus {
     border-color: var(--color-accent-primary);
+    background-color: rgba(20, 26, 42, 0.8);
+    /* Slight darken */
+    box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.2);
 }
 
-.inputGroup input::placeholder {
-    color: rgba(255, 255, 255, 0.2);
+.unit {
+    position: absolute;
+    right: 24px;
+    color: var(--color-text-secondary);
+    font-size: 20px;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.inputGroup.error input {
+    border-color: var(--color-warning);
+    /* Or error red? Prompt said Yellow is warning, usually Red for error. */
+    /* Let's stick to prompt palette or standard error. Prompt palette doesn't have explicit Error Red, only Success/Warning.
+     I'll use a standard red or the warning yellow if that's the "Error" color intent. 
+     Usually red is better. I'll use a hardcoded red for error for safety. */
+    border-color: #EF4444;
 }
 
 .actionArea {
     width: 100%;
     display: flex;
     justify-content: center;
+    position: fixed;
+    /* Sticky-ish bottom */
+    bottom: 0;
+    left: 0;
+    padding: 32px;
+    background: linear-gradient(to top, var(--color-bg-primary) 80%, transparent);
+    z-index: 10;
 }

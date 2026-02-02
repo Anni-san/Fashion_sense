@@ -13,14 +13,20 @@ const ProductDetails = () => {
     const { addToCart } = useCart();
     const product = products.find(p => p.id === parseInt(id));
 
-    // Default size selection logic (e.g. recommend M)
-    const [selectedSize, setSelectedSize] = useState('M');
+    // Logic: Some sizes disabled for "realism"
+    const availableSizes = ["S", "M", "L", "XL"];
+    const disabledSizes = ["XS", "XXL"]; // Example disabled
+    const recommendedSize = "M"; // Based on prompt context
+
+    const [selectedSize, setSelectedSize] = useState(recommendedSize);
+    const [showAddedToast, setShowAddedToast] = useState(false);
 
     if (!product) return <div>Product not found</div>;
 
     const handleAddToCart = () => {
         addToCart(product, selectedSize);
-        navigate('/cart');
+        setShowAddedToast(true);
+        setTimeout(() => setShowAddedToast(false), 2000);
     };
 
     const handleBuyNow = () => {
@@ -30,60 +36,74 @@ const ProductDetails = () => {
 
     return (
         <PageWrapper showHeader={true} showFooter={false}>
-            <button className={styles.backBtn} onClick={() => navigate(-1)}>← Back</button>
-
             <div className={styles.layout}>
+                {/* Visible Back Button */}
+                <button className={styles.backBtn} onClick={() => navigate(-1)} aria-label="Go back">
+                    <span className={styles.backIcon}>←</span> Back
+                </button>
+
                 <div className={styles.imageCol}>
                     <img src={product.image} alt={product.name} className={styles.image} />
                 </div>
 
                 <div className={styles.infoCol}>
-                    <div className={styles.header}>
-                        <div className={styles.matchBadge}>⭐ {product.fitScore}% Match</div>
-                        <h1 className={styles.name}>{product.name}</h1>
-                        <p className={styles.price}>${product.price.toFixed(2)}</p>
+                    <div className={styles.scrollableContent}>
+                        <div className={styles.header}>
+                            <div className={styles.matchBadge}>⭐ {product.fitScore}% Match</div>
+                            <h1 className={styles.name}>{product.name}</h1>
+                            <p className={styles.price}>${product.price.toFixed(2)}</p>
+                        </div>
+
+                        <div className={styles.section}>
+                            <h3>Description</h3>
+                            <p>{product.description}</p>
+                        </div>
+
+                        <div className={styles.section}>
+                            <h3>Details</h3>
+                            <div className={styles.detailRow}><span>Material</span><span>{product.material}</span></div>
+                            <div className={styles.detailRow}><span>Fit</span><span>{product.fit}</span></div>
+                            <div className={styles.iconsRow}><span>🧴 {product.care}</span></div>
+                        </div>
+
+                        <div className={styles.section}>
+                            <h3>Select Size</h3>
+                            <div className={styles.sizeGrid}>
+                                {availableSizes.map(size => (
+                                    <button
+                                        key={size}
+                                        className={`${styles.sizeBtn} ${selectedSize === size ? styles.selected : ''}`}
+                                        onClick={() => setSelectedSize(size)}
+                                    >
+                                        {size}
+                                    </button>
+                                ))}
+                                {/* Render some disabled ones for demo */}
+                                {['XXL'].map(size => (
+                                    <button key={size} className={styles.sizeBtn} disabled>
+                                        {size}
+                                    </button>
+                                ))}
+                            </div>
+                            <p className={styles.sizeHint}>
+                                Recommended for you: <strong>{recommendedSize}</strong>
+                                <span className={styles.sizeReason}> (Best fit for your chest/waist)</span>
+                            </p>
+                        </div>
+
+                        {/* Spacer for sticky actions */}
+                        <div style={{ height: 120 }}></div>
                     </div>
 
-                    <div className={styles.section}>
-                        <h3>Description</h3>
-                        <p>{product.description}</p>
-                    </div>
-
-                    <div className={styles.section}>
-                        <h3>Details</h3>
-                        <div className={styles.detailRow}>
-                            <span>Material</span>
-                            <span>{product.material}</span>
+                    <div className={styles.stickyActions}>
+                        <div className={styles.actionsInner}>
+                            <SecondaryButton onClick={handleAddToCart} className={styles.cartBtn}>
+                                {showAddedToast ? "Added! ✓" : "Add to Cart"}
+                            </SecondaryButton>
+                            <PrimaryButton onClick={handleBuyNow} className={styles.buyBtn}>
+                                Buy Now
+                            </PrimaryButton>
                         </div>
-                        <div className={styles.detailRow}>
-                            <span>Fit</span>
-                            <span>{product.fit}</span>
-                        </div>
-                        <div className={styles.iconsRow}>
-                            {/* Simple icons text for care */}
-                            <span>🧴 {product.care}</span>
-                        </div>
-                    </div>
-
-                    <div className={styles.section}>
-                        <h3>Select Size</h3>
-                        <div className={styles.sizeGrid}>
-                            {product.sizes.map(size => (
-                                <button
-                                    key={size}
-                                    className={`${styles.sizeBtn} ${selectedSize === size ? styles.selected : ''}`}
-                                    onClick={() => setSelectedSize(size)}
-                                >
-                                    {size}
-                                </button>
-                            ))}
-                        </div>
-                        <p className={styles.sizeHint}>Recommended for you: <strong>M</strong></p>
-                    </div>
-
-                    <div className={styles.actions}>
-                        <SecondaryButton onClick={handleAddToCart}>Add to Cart</SecondaryButton>
-                        <PrimaryButton onClick={handleBuyNow}>Buy Now</PrimaryButton>
                     </div>
                 </div>
             </div>

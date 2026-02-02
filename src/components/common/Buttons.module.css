@@ -6,26 +6,37 @@
     font-size: var(--text-button);
     font-weight: var(--font-weight-medium);
     padding: 0 32px;
-    transition: filter 0.2s, transform 0.15s;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 0 4px 12px rgba(79, 140, 255, 0.3);
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Subtle glow/lift on hover */
 .primary:hover:not(:disabled) {
-    filter: brightness(1.06);
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 140, 255, 0.4);
 }
 
+/* Scale down on press */
 .primary:active:not(:disabled) {
     transform: scale(0.97);
+    box-shadow: 0 2px 4px rgba(79, 140, 255, 0.2);
 }
 
 .primary:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
+
+/* Ripple effect could be added via JS, but CSS active state is good for now */
 
 .secondary {
     background-color: transparent;
@@ -36,7 +47,7 @@
     font-size: var(--text-button);
     font-weight: var(--font-weight-medium);
     padding: 0 32px;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
     width: 100%;
     display: flex;
     align-items: center;
@@ -44,11 +55,14 @@
 }
 
 .secondary:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.08);
+    /* Slightly more visible */
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .secondary:active:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.12);
+    transform: scale(0.98);
 }
 
 .secondary:disabled {
