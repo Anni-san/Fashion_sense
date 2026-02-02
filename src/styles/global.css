@@ -1,0 +1,92 @@
+@import './variables.css';
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    /* Remove tap highlight on touch */
+    user-select: none;
+    /* Prevent text selection generally */
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: var(--font-family);
+    font-size: var(--text-body);
+    line-height: 1.4;
+    overflow: hidden;
+    /* Prevent body scroll, handle internally */
+    /* Hide cursor if desired for pure touch, but usually keeping it for dev is fine. 
+     For production kiosk, often cursor: none is added via CSS or OS. 
+     We'll leave it visible for now or set to none if requested. 
+     Prompt says "No browser UI visible", implies full screen. */
+}
+
+h1 {
+    font-size: var(--text-heading-xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+h2 {
+    font-size: var(--text-heading-l);
+    font-weight: var(--font-weight-medium);
+}
+
+h3 {
+    font-size: var(--text-heading-m);
+    font-weight: var(--font-weight-medium);
+}
+
+p {
+    font-size: var(--text-body);
+    color: var(--color-text-secondary);
+}
+
+button {
+    font-family: var(--font-family);
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+input {
+    font-family: var(--font-family);
+}
+
+/* Scrollbar styling for internal scroll containers */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+/* Animations */
+.fade-enter {
+    opacity: 0;
+    transform: scale(0.98);
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity var(--transition-speed) var(--transition-ease),
+        transform var(--transition-speed) var(--transition-ease);
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity var(--transition-speed) var(--transition-ease);
+}

@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    items-align: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--color-bg-surface);
+    padding: 64px;
+    border-radius: var(--border-radius-lg);
+    max-width: 600px;
+    width: 100%;
+    animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.iconCircle {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-success);
+    border-radius: 50%;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.successText {
+    color: white;
+    margin-bottom: 16px;
+}
+
+.orderId {
+    color: var(--color-text-secondary);
+    font-family: monospace;
+    font-size: 20px;
+    margin-bottom: 32px;
+}
+
+.qrPlaceholder {
+    margin-bottom: 32px;
+    padding: 16px;
+    background: white;
+    border-radius: 16px;
+}
+
+.instruction {
+    font-size: 18px;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+}
