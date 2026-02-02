@@ -49,14 +49,31 @@ const Processing = () => {
                     </div>
 
                     <div className={styles.stepsContainer}>
-                        {steps.map((text, index) => (
-                            <div
-                                key={index}
-                                className={`${styles.step} ${index === activeStep ? styles.active : ''} ${index < activeStep ? styles.completed : ''}`}
-                            >
-                                {index < activeStep ? '✓' : (index === activeStep ? '➤' : '○')} {text}
-                            </div>
-                        ))}
+                        {steps.map((text, index) => {
+                            const isCompleted = index < activeStep;
+                            const isActive = index === activeStep;
+
+                            return (
+                                <div
+                                    key={index}
+                                    className={`${styles.step} ${isActive ? styles.active : ''} ${isCompleted ? styles.completed : ''}`}
+                                >
+                                    <div className={styles.stepContent}>
+                                        <span className={styles.icon}>
+                                            {isCompleted ? '✓' : (isActive ? '➤' : '•')}
+                                        </span>
+                                        <span className={styles.stepText}>{text}</span>
+                                    </div>
+
+                                    {/* Reassurance Text (Only for active step) */}
+                                    {isActive && (
+                                        <p className={styles.reassuranceText}>
+                                            This won't take long...
+                                        </p>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
 
                     {showTimeout && (

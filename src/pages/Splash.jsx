@@ -23,7 +23,6 @@ const Splash = () => {
 
                 if (next >= 100) {
                     clearInterval(timer);
-                    // Small delay at 100% before navigation
                     setTimeout(() => navigate('/input-selection'), 200);
                     return 100;
                 }
@@ -37,21 +36,24 @@ const Splash = () => {
     return (
         <PageWrapper showHeader={false} className={styles.container}>
             <div className={styles.content}>
-                <div className={styles.logoWrapper}>
-                    <h1 className={styles.logo}>FashionSense</h1>
-                    <p className={styles.contextLine}>In-store smart fitting system</p>
+
+                <div className={styles.brandingSection}>
+                    <h1 className={styles.brandName}>FashionSense</h1>
+                    <p className={styles.systemBadge}>In-store Smart Fitting System</p>
+                    <p className={styles.tagline}>Try smart. Shop faster.</p>
                 </div>
 
-                <p className={styles.tagline}>Try smart. Shop faster.</p>
-
-                <div className={styles.loaderWrapper}>
-                    <div className={styles.progressContainer}>
+                <div className={styles.loaderSection}>
+                    <div className={styles.progressTrack}>
                         <div className={styles.progressBar} style={{ width: `${progress}%` }} />
                     </div>
-                    <p className={styles.loadingText}>
-                        {loadingText} <span className={styles.percentage}>{Math.round(progress)}%</span>
-                    </p>
+
+                    <div className={styles.statusGroup}>
+                        <span className={styles.percentage}>{Math.round(progress)}%</span>
+                        <span className={styles.statusText}>{loadingText}</span>
+                    </div>
                 </div>
+
             </div>
         </PageWrapper>
     );

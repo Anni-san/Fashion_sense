@@ -2,10 +2,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    /* Removed justify-content: center to allow natural flow */
+    justify-content: flex-start;
+    min-height: 100vh;
+    height: auto;
+    padding-top: 40px;
+    /* Add top spacing */
     padding-bottom: 80px;
-    /* Space for sticky button visual balance */
+    /* Reduced space since button is no longer fixed */
+    overflow-y: auto;
 }
 
 .stepIndicator {
@@ -13,24 +18,26 @@
     font-size: 14px;
     letter-spacing: 1px;
     color: var(--color-text-secondary);
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    /* More breathing room */
     font-weight: 600;
 }
 
 .heading {
-    margin-bottom: 48px;
+    margin-bottom: 56px;
+    /* More spacing */
     text-align: center;
 }
 
 .formGrid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px 64px;
-    /* Wider gap */
+    gap: 48px 64px;
+    /* Wider vertical gap (48px) */
     width: 100%;
     max-width: 800px;
-    /* Wider container */
-    margin-bottom: 64px;
+    margin-bottom: 0;
+    /* Margin handled by actionArea gap */
 }
 
 .inputGroup {
@@ -95,11 +102,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    position: fixed;
-    /* Sticky-ish bottom */
-    bottom: 0;
-    left: 0;
-    padding: 32px;
-    background: linear-gradient(to top, var(--color-bg-primary) 80%, transparent);
-    z-index: 10;
+    /* Static positioning to prevent overlap */
+    position: relative;
+    padding: 32px 0 0 0;
+    /* Top padding only */
+    margin-top: 64px;
+    /* Clear separation from form */
+    background: transparent;
+    z-index: 1;
 }
