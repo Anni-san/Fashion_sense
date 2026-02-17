@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import PageWrapper from '../components/common/PageWrapper';
 import SecondaryButton from '../components/common/SecondaryButton';
 import styles from './Processing.module.css';
 
 const Processing = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [activeStep, setActiveStep] = useState(0);
     const [showTimeout, setShowTimeout] = useState(false);
 
@@ -23,7 +24,7 @@ const Processing = () => {
 
         // Navigation trigger (success path)
         const successTimeout = setTimeout(() => {
-            navigate('/recommendations');
+            navigate('/recommendations', { state: location.state });
         }, 5000); // 5s total normal time
 
         // Fallback/Safety timeout (in case of hang perception, though here it's just visual)
